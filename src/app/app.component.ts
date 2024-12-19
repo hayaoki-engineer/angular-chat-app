@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { Comment } from './class/comment';
 import { User } from './class/user';
+import { FormsModule } from '@angular/forms';
 
 // ユーザー情報を定義（現在のユーザーと別のユーザー）
 const CURRENT_USER: User = new User(1, '五十川 洋平');
@@ -20,7 +21,7 @@ const COMMENTS: Comment[] = [
 @Component({
   selector: 'ac-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -29,4 +30,14 @@ export class AppComponent {
   comments = COMMENTS;
   // 送信者の情報として表示する現在のユーザー
   currentUser = CURRENT_USER;
+
+  // チャットのメッセージを格納する変数
+  comment = '';
+
+  addComment(comment: string) {
+    if (comment) {
+      this.comments.push(new Comment(this.currentUser, comment))
+    }
+  }
+  
 }
