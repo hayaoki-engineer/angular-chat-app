@@ -1,13 +1,28 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+import { Comment } from './class/comment';
+import { User } from './class/user';
+
+const CURRENT_USER: User = new User(1, '五十川 洋平');
+const ANOTHER_USER: User = new User(2, '竹井 賢治');
+
+const COMMENTS: Comment[] = [
+  new Comment(ANOTHER_USER, 'お疲れ様です！'),
+  new Comment(ANOTHER_USER, 'お疲れ様です！'),
+  new Comment(CURRENT_USER, 'お疲れ様です！'),
+  new Comment(CURRENT_USER, 'クライアントからOKが出ました！'),
+];
 
 @Component({
   selector: 'ac-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'angular-chat-app';
+  comments = COMMENTS;
+  currentUser = CURRENT_USER;
 }
