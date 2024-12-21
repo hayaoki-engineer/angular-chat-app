@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Comment } from './class/comment';
 import { User } from './class/user';
 import { FormsModule } from '@angular/forms';
+import { CommentDatePipe } from './pipes/comment-date.pipe';
 
 // ユーザー情報を定義（現在のユーザーと別のユーザー）
 const CURRENT_USER: User = new User(1, '五十川 洋平');
@@ -21,7 +22,7 @@ const COMMENTS: Comment[] = [
 @Component({
   selector: 'ac-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, FormsModule],
+  imports: [RouterOutlet, CommonModule, FormsModule, CommentDatePipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -34,10 +35,12 @@ export class AppComponent {
   // チャットのメッセージを格納する変数
   comment = '';
 
+  // コメントを追加するメソッド
   addComment(comment: string) {
     if (comment) {
+      // 現在のユーザーとコメントを使用して、新しいCommentオブジェクトを作成し、comments配列に追加
       this.comments.push(new Comment(this.currentUser, comment))
     }
   }
-  
+
 }
